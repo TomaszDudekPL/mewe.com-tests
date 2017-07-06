@@ -1,0 +1,24 @@
+To test the integrity of www.mewe.com, CasperJs framework and PhantomJS were used as a command line browser.
+
+CasperJs, unlike other testing tools, does not require a graphical environment. Testing is performed from the command line.
+
+Full documentation of CasperJs with installation conditions can be found here:  [CasperJs](http://docs.casperjs.org/en/latest/)
+
+To run the prepared test scripts, you must first install the dependencies with the * `npm install` command, followed by *`npm start`.
+
+## Description:
+The prepared script waits 10 seconds for the required part of www.mewe.com to appear, and then performs a series of tests.
+
+## The first test checks if a person under the age of 13 can sign up for the service.
+
+In this case, using the command: * `casper.start ('https://mewe.com', ...)` invokes www.mewe.com and then executes the command `* casper.waitForSelector ('# registration-form '...) `,  which will wait for the selector to appear with the indicated ID.
+
+The next step is to call the function
+* `This.fillSelectors ('# registration-form', ...)`, which fills the indicated form fields with the specified values.
+
+The function `* this.click ('# submit-registration');` sends a registration form with the filled values.
+
+Next we call the function `* casper.waitForSelector ('input # reg-user-age.input-error' ...)`, which expects the warning of a lack of registration for a person under the age of 13.
+
+When such a warning appears, the test is deemed complete.
+
